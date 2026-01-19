@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Happy Birthday ✨</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#070b16;
+  --card:#0f1528;
+  --accent:#ff6fae;
+  --accent-soft:#ffb3d6;
+  --text:#eef1f7;
+  --muted:#9aa4c7;
+  --glow:0 0 35px rgba(255,111,174,0.55);
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Inter',sans-serif;
+  background:radial-gradient(circle at top,var(--card),var(--bg));
+  color:var(--text);
+  overflow-x:hidden;
+}
+
+canvas{
+  position:fixed;
+  inset:0;
+  z-index:-1;
+}
+
+section{
+  min-height:100vh;
+  padding:90px 20px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+}
+
+.container{max-width:900px;}
+
+.hero h1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2.6rem,6vw,4.8rem);
+  margin-bottom:20px;
+}
+.hero span{color:var(--accent);text-shadow:var(--glow);}
+.hero p{color:var(--muted);font-size:1.1rem;}
+
+.card{
+  background:linear-gradient(145deg,#141a35,#0a0f22);
+  border-radius:26px;
+  padding:45px 35px;
+  box-shadow:0 40px 90px rgba(0,0,0,.6);
+}
+
+.photo{
+  width:260px;
+  height:260px;
+  border-radius:50%;
+  object-fit:cover;
+  border:4px solid var(--accent);
+  box-shadow:var(--glow);
+  margin-bottom:25px;
+}
+
+.type{
+  font-size:1.4rem;
+  white-space:nowrap;
+  overflow:hidden;
+  border-right:3px solid var(--accent);
+  width:0;
+  animation:typing 4s steps(40,end) forwards,blink .8s infinite;
+}
+@keyframes typing{to{width:100%;}}
+@keyframes blink{50%{border-color:transparent;}}
+
+button{
+  margin-top:30px;
+  padding:15px 44px;
+  font-size:1rem;
+  border:none;
+  border-radius:50px;
+  background:var(--accent);
+  color:#fff;
+  cursor:pointer;
+  box-shadow:var(--glow);
+  transition:.35s;
+}
+button:hover{transform:scale(1.08);}
+
+.heart{font-size:4rem;animation:pulse 1.5s infinite;}
+@keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.2);}}
+
+.reveal{opacity:0;transform:translateY(40px);transition:1.2s;}
+.reveal.active{opacity:1;transform:none;}
+
+footer{padding:30px;font-size:.9rem;color:var(--muted);}
+</style>
+</head>
+
+<body>
+<canvas id="stars"></canvas>
+
+<section class="hero">
+  <div class="container">
+    <h1>Happy Birthday <span>Dear ayesha ✨</span></h1>
+    <p>Today the world feels softer, brighter — because it's your day.</p>
+  </div>
+</section>
+
+<section>
+  <div class="card reveal">
+    <h2>You Are Grace & Strength 🌙</h2>
+    <p class="type">A sister. A friend. A forever blessing.</p>
+  </div>
+</section>
+
+<section>
+  <div class="card reveal">
+    <h2>From My Heart ❤️</h2>
+    <p style="margin-top:18px;color:var(--muted);line-height:1.8;">
+      You walk with quiet elegance, strength in your silence, and kindness in your eyes.
+      Your presence brings comfort, your smile brings light, and your heart makes the world feel safer.
+      On your birthday, I hope life gives you the same warmth you give others — endlessly.
+    </p>
+  </div>
+</section>
+
+<section>
+  <div class="card reveal">
+    <h2>Unbreakable Bond ✨</h2>
+    <p style="margin-top:15px;color:var(--muted);">
+      No distance, no time, no change —
+      just love that stays, always.
+    </p>
+    <div class="heart">💖</div>
+  </div>
+</section>
+
+<section>
+  <div class="card reveal">
+    <h2>A Little Surprise 🎁</h2>
+    <button onclick="surprise()">Open Message</button>
+    <p id="surpriseText" style="margin-top:20px;"></p>
+  </div>
+</section>
+
+<footer>Crafted with love from Moazzam✨ for a blessing like sister  | A memory that lives forever</footer>
+
+<script>
+const canvas=document.getElementById('stars');
+const ctx=canvas.getContext('2d');
+let w,h,stars=[];
+function resize(){w=canvas.width=window.innerWidth;h=canvas.height=window.innerHeight;}
+window.onresize=resize;resize();
+for(let i=0;i<160;i++)stars.push({x:Math.random()*w,y:Math.random()*h,r:Math.random()*1.5});
+function draw(){ctx.clearRect(0,0,w,h);ctx.fillStyle='#fff';stars.forEach(s=>{ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fill();s.y+=0.25;if(s.y>h)s.y=0;});requestAnimationFrame(draw);}draw();
+
+const reveals=document.querySelectorAll('.reveal');
+window.addEventListener('scroll',()=>{reveals.forEach(r=>{if(r.getBoundingClientRect().top<window.innerHeight-100)r.classList.add('active');});});
+
+function surprise(){
+  document.getElementById('surpriseText').innerHTML="🎉 You are deeply loved, endlessly valued, and incredibly special. Never forget your light.";
+}
+</script>
+</body>
+</html>
